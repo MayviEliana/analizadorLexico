@@ -46,8 +46,9 @@ def armarArbol(pila):
     izq, der, valor = None, None, ""
     while not len(pila) == 0:
 
-        valor = pila.pop(0)
-       
+        valorT = pila.pop(0)
+        valor=valorT[0]
+        
         if valor in "+-*/":
             der = auxPila.desapilar()
             izq = auxPila.desapilar()
@@ -59,14 +60,17 @@ def armarArbol(pila):
                 valor = diccionario[valor][0]
                 auxPila.apilar(Nodo(valor))
                 
-            else:
-                aux = pila.pop(0)
                 
+            else:
+                auxT = pila.pop(0)
+                aux=auxT[0]
                 if aux == "=":
+                     
                      diccionario[valor] = [evaluar(auxPila.desapilar())]
 
         else:
             auxPila.apilar(Nodo(valor))
+    
             
 def usage():
     sys.stderr.write('Usage: imp filename\n')
@@ -80,7 +84,8 @@ if __name__ == '__main__':
     tokens = imp_lex(text)
     for token in tokens :
         print token
+    
 
-  #  armarArbol(tokens)
-  #  print diccionario
+    armarArbol(tokens)
+    print diccionario
         
